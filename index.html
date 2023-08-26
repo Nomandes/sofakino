@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <title>Sofa Kino Darmstadt</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+</head>
+
+<body>
+  <main class="container">
+    <div class="headline col-main row-nav">
+      <img class="logo" alt="Logo Sofa Kino Darmstadt" src="./media/images/logos/skd_logo.png"></img>
+      <h2 class="date">Screening: Sunday, 26.08.2023</h2>
+    </div>
+    <div class="cinema col-main row-cinema">
+      <div id="screen" onmouseover="SFKScreen.handleMouseEnter(this)" onmouseleave="SFKScreen.handleMouseLeave(this)"
+        onclick="SFKScreen.handleClick(this)">
+        <span class="curtain-container">
+          <span id="curtain-left" class="curtain">
+            <h3 class="movie-title">Die Frau im Nebel</h3>
+            <img class="movie-poster" alt="Die Frau im Nebel Poster" src="https://de.web.img3.acsta.net/r_1920_1080/pictures/22/12/13/14/59/5568638.jpg" />
+          </span>
+          <span id="curtain-right" class="curtain">
+            <p class="movie-description">
+              From a mountain peak in South Korea, a man plummets to his death. Did he jump, or was he pushed? When detective
+              Hae-joon arrives on the scene, he begins to suspect the dead man's wife Seo-rae. But as he digs deeper into the
+              investigation, he finds himself trapped in a web of deception and desire.
+            </p>
+            <span class="movie-infos">
+              <span class="movie-genre"><i data-feather="film"></i>Mystery, Neo-Noir</span>
+              <span class="movie-runtime"><i data-feather="clock"></i>139 Minutes</span>
+              <span class="movie-release"><i data-feather="calendar"></i>2022</span>
+              <span class="movie-language"><i data-feather="globe"></i>Korean(German Sub)</span>
+            </span>
+          </span>
+        </span>
+        <iframe class="youtube-iframe" src="https://www.youtube-nocookie.com/embed/WfOzFiNa2uw" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <div id="sofa">
+        <model-viewer id="sofa-model" src="./media/models/sofa_red.gltf" ar shadow-intensity="1" disable-zoom
+          camera-orbit="180deg 70deg 0m"></model-viewer>
+          <button id="button-booking">Platz buchen</button>
+        <span class="seats">
+          <span class="seat"></span>
+          <span class="seat"></span>
+          <span class="seat"></span>
+        </span>
+      </div>
+    </div>
+    <h1 class="col-main row-headline">Sofa Kino Darmstadt</h1>
+  </main>
+  <footer>
+
+  </footer>
+
+  <!--JS Includes-->
+  <script src="/js/feather.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/screen.js"></script>
+</body>
+
+</html>
