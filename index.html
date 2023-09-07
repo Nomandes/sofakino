@@ -8,7 +8,7 @@
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 </head>
 
-<body>
+<body onclick="SFKScreen.handleBodyClick()">
   <main class="container">
     <div class="headline col-main row-nav">
       <img class="logo" alt="Logo Sofa Kino Darmstadt" src="./media/images/logos/skd_logo.png"></img>
@@ -16,7 +16,7 @@
     </div>
     <div class="cinema col-main row-cinema">
       <div id="screen" onmouseover="SFKScreen.handleMouseEnter(this)" onmouseleave="SFKScreen.handleMouseLeave(this)"
-        onclick="SFKScreen.handleClick(this)">
+        onclick="SFKScreen.handleClick(event)">
         <span class="curtain-container">
           <span id="curtain-left" class="curtain">
             <h3 class="movie-title">Die Frau im Nebel</h3>
@@ -36,22 +36,32 @@
             </span>
           </span>
         </span>
-        <iframe class="youtube-iframe" src="https://www.youtube-nocookie.com/embed/WfOzFiNa2uw" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+        <iframe class="youtube-iframe" 
+        src="https://www.youtube-nocookie.com/embed/WfOzFiNa2uw" 
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
       </div>
       <div id="sofa">
-        <model-viewer id="sofa-model" src="./media/models/sofa_red.gltf" ar shadow-intensity="1" disable-zoom
-          camera-orbit="180deg 70deg 0m"></model-viewer>
-          <button id="button-booking">Platz buchen</button>
-        <span class="seats">
-          <span class="seat"></span>
-          <span class="seat"></span>
-          <span class="seat"></span>
-        </span>
+        <model-viewer id="sofa-model" 
+          src="./media/models/sofa_red.gltf" 
+          shadow-intensity="5" disable-zoom
+          camera-orbit="180deg 75deg 1.34m"
+          camera-target="auto 5cm auto">
+            <div class="sofa-back">
+              <button id="button-booking" onclick="SFKBooking.handleBookingClick()">Ticket buchen</button>
+            </div>
+            <div class="sofa-front">
+              <span class="seats">
+                <span class="seat"></span>
+                <span class="seat"></span>
+                <span class="seat"></span>
+              </span>
+            </div>
+        </model-viewer>
       </div>
     </div>
-    <h1 class="col-main row-headline">Sofa Kino Darmstadt</h1>
+    <!-- <h1 class="col-main row-headline">Sofa Kino Darmstadt</h1> -->
   </main>
   <footer>
 
@@ -61,6 +71,7 @@
   <script src="/js/feather.min.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/screen.js"></script>
+  <script src="/js/booking.js"></script>
 </body>
 
 </html>
