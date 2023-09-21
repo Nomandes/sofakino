@@ -4,6 +4,7 @@
 <head>
   <title>Sofa Kino Darmstadt</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" type="text/css" href="./css/main.css">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 </head>
@@ -13,6 +14,7 @@
     <div class="headline col-main row-nav">
       <img class="logo" alt="Logo Sofa Kino Darmstadt" src="./media/images/logos/skd_logo.png"></img>
       <h2 class="date">Screening: Sunday, 26.08.2023</h2>
+      <button onclick="">Login</button>
     </div>
     <div class="cinema col-main row-cinema">
       <div id="screen" onmouseover="SFKScreen.handleMouseEnter(this)" onmouseleave="SFKScreen.handleMouseLeave(this)"
@@ -20,55 +22,157 @@
         <span class="curtain-container">
           <span id="curtain-left" class="curtain">
             <h3 class="movie-title">Die Frau im Nebel</h3>
-            <img class="movie-poster" alt="Die Frau im Nebel Poster" src="https://de.web.img3.acsta.net/r_1920_1080/pictures/22/12/13/14/59/5568638.jpg" />
+            <img class="movie-poster" alt="Die Frau im Nebel Poster"
+              src="https://de.web.img3.acsta.net/r_1920_1080/pictures/22/12/13/14/59/5568638.jpg" />
           </span>
           <span id="curtain-right" class="curtain">
             <p class="movie-description">
-              From a mountain peak in South Korea, a man plummets to his death. Did he jump, or was he pushed? When detective
-              Hae-joon arrives on the scene, he begins to suspect the dead man's wife Seo-rae. But as he digs deeper into the
+              From a mountain peak in South Korea, a man plummets to his death. Did he jump, or was he pushed? When
+              detective
+              Hae-joon arrives on the scene, he begins to suspect the dead man's wife Seo-rae. But as he digs deeper
+              into the
               investigation, he finds himself trapped in a web of deception and desire.
             </p>
             <span class="movie-infos">
-              <span class="movie-genre"><i data-feather="film"></i>Mystery, Neo-Noir</span>
-              <span class="movie-runtime"><i data-feather="clock"></i>139 Minutes</span>
-              <span class="movie-release"><i data-feather="calendar"></i>2022</span>
-              <span class="movie-language"><i data-feather="globe"></i>Korean(German Sub)</span>
+              <span class="movie-genre"><ion-icon name="film-outline"></ion-icon>Mystery, Neo-Noir</span>
+              <span class="movie-runtime"><ion-icon name="hourglass-outline"></ion-icon>139 Minutes</span>
+              <span class="movie-release"><ion-icon name="calendar-outline"></ion-icon>2022</span>
+              <span class="movie-language"><ion-icon name="earth-outline"></ion-icon>Korean(German Sub)</span>
             </span>
           </span>
         </span>
-        <iframe class="youtube-iframe" 
-        src="https://www.youtube-nocookie.com/embed/WfOzFiNa2uw" 
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+        <iframe class="youtube-iframe" src="https://www.youtube-nocookie.com/embed/WfOzFiNa2uw" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
       </div>
       <div id="sofa">
-        <model-viewer id="sofa-model" 
-          src="./media/models/sofa_red.gltf" 
-          shadow-intensity="5" disable-zoom
-          camera-orbit="180deg 75deg 1.34m"
-          camera-target="auto 5cm auto">
-            <div class="sofa-back">
-              <button id="button-booking" onclick="SFKBooking.handleBookingClick()">Ticket buchen</button>
-            </div>
-            <div class="sofa-front">
-              <span class="seats">
-                <span class="seat"></span>
-                <span class="seat"></span>
-                <span class="seat"></span>
-              </span>
-            </div>
+        <model-viewer id="sofa-model" src="./media/models/sofa_red.gltf" shadow-intensity="5" disable-zoom
+          camera-orbit="180deg 75deg 1.34m" camera-target="auto 5cm auto">
+          <div class="sofa-back">
+            <button id="button-booking-seats" class="button-pushable" role="button" onclick="SFKBooking.handleBookingClick(event,this)">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text"><ion-icon name="ticket-outline"></ion-icon>Verfügbare Plätze</span>
+            </button>
+          </div>
+          <div id="sofa-front" class="hidden">
+            <span class="seats">
+              <span class="seat" id="seat-1" onclick="SFKBooking.handleSeatClick(event,this)">
+                <ion-icon name="person-add-outline"></ion-icon></span>
+              <span class="seat" id="seat-2" onclick="SFKBooking.handleSeatClick(event,this)">
+                <ion-icon name="person-add-outline"></ion-icon></span>
+              <span class="seat" id="seat-3" onclick="SFKBooking.handleSeatClick(event,this)">
+                <ion-icon name="person-add-outline"></ion-icon></span>
+            </span>
+            <span class="hidden" id="seat-booked-icon"><ion-icon name="person-outline"></ion-icon></span>
+          </div>
         </model-viewer>
       </div>
+      <div id="overlay" class="hidden">
+        <div id="booking-confirmation-screen">
+          <h2 class="confirmation-heading">
+            Sonntag, 26.08.2023, Die Frau im Nebel
+          </h2>
+          <p class="confirmation-tickets">
+            <ion-icon name="ticket-outline"></ion-icon> 1 Ticket
+          </p>
+          <button id="button-booking-abort" class="button-pushable" role="button" onclick="SFKBooking.handleBookingClick(event,this)">
+            <span class="button-shadow"></span>
+            <span class="button-edge"></span>
+            <span class="button-front text">Abbrechen</span>
+          </button>
+          <button id="button-booking-confirm" class="button-pushable" role="button" onclick="SFKBooking.handleBookingClick(event,this)">
+            <span class="button-shadow"></span>
+            <span class="button-edge"></span>
+            <span class="button-front text">Bestätigen</span>
+          </button>
+        </div>
+        <div id="booking-end-screen" class="hidden">
+          <span class="end-heading">1 Ticket gebucht für "Die Frau im Nebel" am 26.08.2023, 19 Uhr</span>
+          <span class="end-calendar-entry"><ion-icon name="calendar-number-outline"></ion-icon>In Kalendar eintragen</span>
+          <span class="end-apple-wallet"><ion-icon name="wallet-outline"></ion-icon>Ticket in Wallet speichern</span>
+        </div>
+      </div>
     </div>
-    <!-- <h1 class="col-main row-headline">Sofa Kino Darmstadt</h1> -->
+    <!--<div class="col-main row-rest">
+      <h3>Hop on the couch, every last sunday of the month!</h3>
+    </div>-->
+    <div class="col-main row-program">
+      <h2>Kommende Vorstellungen</h2>
+      <div class="calendar">
+        <div class="entry">
+          <div class="date">
+            <div class="day">29</div>
+            <div class="month">Oktober</div>
+          </div>
+          <img class="movie-poster" alt="Pearl Poster"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhY-7iLhrzLy2v_25ICPx0B1YOB2zuFBg_tLcRcWWif4-IYmM4" />
+          <div class="movie-infos">
+            <h3>Pearl</h3>
+            <p>Trapped on her family’s isolated farm, Pearl must tend to her ailing father under the bitter and
+              overbearing watch of her devout mother. Lusting for a glamorous life like she’s seen in the movies,
+              Pearl’s ambitions, temptations, and repressions all collide, in the stunning, technicolor-inspired origin
+              story of X’s iconic villain.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="date">
+            <div class="day">26</div>
+            <div class="month">November</div>
+          </div>
+          <img class="movie-poster" alt="Pearl Poster"
+            src="https://i.etsystatic.com/28976030/r/il/a5909f/4633853300/il_fullxfull.4633853300_g5b9.jpg" />
+          <div class="movie-infos">
+            <h3>John Wick 4</h3>
+            <p>With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But
+              before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the
+              globe and forces that turn old friends into foes.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="date">
+            <div class="day">17</div>
+            <div class="month">Dezember</div>
+          </div>
+          <img class="movie-poster" alt="Pearl Poster"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNr2ISdjT-L5mtKkckMQwvAOhga3heZbnO0Fro2x9j2H_TRA4v" />
+          <div class="movie-infos">
+            <h3>Private Life</h3>
+            <p>Richard and Rachel, a couple in the throes of infertility, try to maintain their marriage as they descend
+              deeper and deeper into the insular world of assisted reproduction and domestic adoption.</p>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="date">
+            <div class="day">28</div>
+            <div class="month">Januar</div>
+          </div>
+          <img class="movie-poster" alt="Pearl Poster"
+            src="https://de.web.img3.acsta.net/pictures/23/05/09/09/46/2288679.jpg" />
+          <div class="movie-infos">
+            <h3>Spider-Man: Across the Spider-Verse</h3>
+            <p>After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted
+              across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with
+              protecting the Multiverse’s very existence. But when the heroes clash on how to handle a new threat, Miles
+              finds himself pitted against the other Spiders and must set out on his own to save those he loves most.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-main row-footer footer">
+      <span><img src="/media/images/turtle.gif" alt="dancing turtle" /> Sofa Kino Darmstadt, 2023</span>
+      <span>Betreiber: Manuel Lehé</span><span><a href="./impressum">Impressum</a></span>
+    </div>
   </main>
   <footer>
 
   </footer>
 
   <!--JS Includes-->
-  <script src="/js/feather.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/screen.js"></script>
   <script src="/js/booking.js"></script>

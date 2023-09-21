@@ -1,0 +1,16 @@
+{
+    "seats":[
+        {
+            "id": "seat-1",
+            "status": "available"
+        },
+        {
+            "id": "seat-2",
+            "status": "booked"
+        },
+        {
+            "id": "seat-3",
+            "status": "available"
+        }
+    ]
+}

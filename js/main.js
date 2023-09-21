@@ -1,2 +1,1 @@
-//Render Icons
-feather.replace();
+// document.getElementById("overlay").style.display = "block";
