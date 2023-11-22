@@ -51,11 +51,9 @@ const SFKBooking = {
         this.CURRENT_STATE = BookingState.Active;
         button.innerHTML = "Zurück";
         SFKBooking.orbitToFront();
-        /*Temporal Fake Data!*/
         fetch('./seat_status.json')
         .then((response) => response.json())
         .then((json) => SFKBooking.showAvailableSeats(json));
-        /*Temporal Fake Data!*/
     },
     deactivateBooking: function(button){
         this.CURRENT_STATE = BookingState.Deactive;

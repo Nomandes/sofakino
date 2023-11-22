@@ -1,0 +1,14 @@
+/*Container Headline*/
+/*#region*/
+.headline{
+    height: 100%;
+    display:flex;
+    align-items: center;
+}
+.headline img{
+    height: inherit;
+}
+.headline .date{
+    display:inline;
+}
+/*#endregion*/
